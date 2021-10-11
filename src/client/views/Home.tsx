@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import { Categories } from '../../../types';
 import RootLayout from '../components/RootLayout';
 import { useForm } from '../hooks/useForm';
@@ -25,6 +26,7 @@ const Home = () => {
     if (values.title && values.author && values.price && values.categoryid) {
         disabledBtn = false;
     }
+
     return (
         <RootLayout>
             <h1 className="text-info text-center bg-light border border-info rounded-pill col-md-4 p-2 mt-3">home</h1>

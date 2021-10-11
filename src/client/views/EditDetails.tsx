@@ -30,7 +30,15 @@ const EditDetails = () => {
             title: 'Confirmation',
             icon: 'question',
             text: `Are you sure you want to edit ${values.title} by ${values.author}?`,
-            confirmButtonText: 'Yes I am sure!'
+            confirmButtonText: 'Yes I am sure!',
+            showDenyButton: true,
+            denyButtonText: 'Actually, no'
+        }).then((result) => {
+            if(result.isConfirmed){
+                Swal.fire('Saved!', '', 'success');
+            } else if (result.isDenied){
+                Swal.fire('Not saved', '', 'info');
+            }
         })) {
             apiService(`/api/books/${id}`, 'PUT', { title: values.title, author: values.author, price: values.price, categoryid: values.categoryid })
                 .then(data => {
@@ -40,6 +48,7 @@ const EditDetails = () => {
     }
     return (
         <RootLayout>
+            <h1 className="text-info text-center bg-light border border-info rounded-pill col-md-4 p-2 mt-3">edit</h1>
             <form className="form-group p-2">
                 <label htmlFor="" className="text-info">title</label>
                 <input
@@ -76,7 +85,7 @@ const EditDetails = () => {
                     ))}
                 </select>
                 <div className="d-flex justify-content-center mt-2">
-                    <Link to={`/books/${id}`} className="btn btn-info mx-3 border rounded-pill">cancel</Link>
+                    <Link to={`/books/${id}`} className="btn btn-danger mx-3 border rounded-pill">cancel</Link>
                     <button onClick={handleEdit} className="btn btn-info mx-3 border rounded-pill">confirm</button>
                 </div>
             </form>

@@ -11,13 +11,21 @@ const BookCard = ({ title, author, price, id, categoryid, isPreview }: Books) =>
             title: 'Deletion',
             icon: 'warning',
             text: `Are you sure you want to delete ${title} by ${author}?`,
-            confirmButtonText: 'Yes I am sure!'
+            confirmButtonText: 'Yes I am sure!',
+            showDenyButton: true,
+            denyButtonText: 'Actually, no'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire('Book successfully deleted!', '', 'success');
+                apiService(`/api/books/${id}`, 'DELETE', { title, author, price, categoryid })
+                    .then(data => {
+                        history.push('/books');
+                    });
+            } else if (result.isDenied) {
+                Swal.fire('Not deleted', '', 'info');
+            }
         })) {
-            apiService(`/api/books/${id}`, 'DELETE', { title, author, price, categoryid })
-                .then(data => {
-                    history.push('/books');
-                })
-        } 
+        }
     }
     return (
         <div className="card border shadow rounded m-2 bg-light">

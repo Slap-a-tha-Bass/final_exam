@@ -16,9 +16,9 @@ const App = (props: AppProps) => {
 		<BrowserRouter>
 			<Navbar />
 			<Switch>
-				<Route exact path="/">
+				<PrivateRoute exact path="/">
 					<Home />
-				</Route>
+				</PrivateRoute>
 				<Route exact path="/books">
 					<Books />
 				</Route>
