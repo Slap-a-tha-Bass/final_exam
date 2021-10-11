@@ -14,6 +14,7 @@ const Books = () => {
 
     return (
         <RootLayout>
+            <h1 className="text-info text-center bg-light border border-info rounded-pill col-md-4 p-2 my-3">books</h1>
             {books.map((book) => (
                 <Link className="text-decoration-none" to={`/books/${book.id}`} key={book.id}>
                     <BookCard {...book} />

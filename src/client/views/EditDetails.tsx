@@ -68,8 +68,8 @@ const EditDetails = () => {
                     ))}
                 </select>
                 <div className="d-flex justify-content-center mt-2">
-                    <Link to={`/books/${id}`} className="btn btn-info mx-3">cancel</Link>
-                    <button onClick={handleEdit} className="btn btn-info mx-3">confirm</button>
+                    <Link to={`/books/${id}`} className="btn btn-info mx-3 border rounded-pill">cancel</Link>
+                    <button onClick={handleEdit} className="btn btn-info mx-3 border rounded-pill">confirm</button>
                 </div>
             </form>
         </RootLayout>

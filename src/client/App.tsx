@@ -25,9 +25,9 @@ const App = (props: AppProps) => {
 				<Route exact path="/books/:id">
 					<BookDetails />
 				</Route>
-				<Route exact path="/edit/:id">
+				<PrivateRoute exact path="/edit/:id">
 					<EditDetails />
-				</Route>
+				</PrivateRoute>
 				<PrivateRoute exact path="/profile">
 					<Profile />
 				</PrivateRoute>

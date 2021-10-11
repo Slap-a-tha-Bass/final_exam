@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 import { Categories } from '../../../types';
 import RootLayout from '../components/RootLayout';
 import { useForm } from '../hooks/useForm';
@@ -20,8 +21,13 @@ const Home = () => {
                 history.push('/books')
             })
     }
+    let disabledBtn = true;
+    if (values.title && values.author && values.price && values.categoryid) {
+        disabledBtn = false;
+    }
     return (
         <RootLayout>
+            <h1 className="text-info text-center bg-light border border-info rounded-pill col-md-4 p-2 mt-3">home</h1>
             <form className="form-group p-2">
                 <label htmlFor="" className="text-info">title</label>
                 <input
@@ -45,11 +51,11 @@ const Home = () => {
                     type="number"
                     step='.01'
                     className="form-control" />
-                <select 
-                name="categoryid" 
-                value={values.categoryid} 
-                onChange={handleChanges}
-                className="form-select">
+                <select
+                    name="categoryid"
+                    value={values.categoryid}
+                    onChange={handleChanges}
+                    className="form-select mt-2">
                     <option value="0">Choose Genre</option>
                     {categories.map((values) => (
                         <option value={values.id} key={values.id}>
@@ -57,7 +63,10 @@ const Home = () => {
                         </option>
                     ))}
                 </select>
-                <button onClick={handleSubmit} className="btn btn-info">submit</button>
+                <div className="d-flex justify-content-center">
+                    <button onClick={handleSubmit} disabled={disabledBtn} className="btn btn-info mt-2 border rounded-pill mx-3">submit</button>
+                    <Link className="btn btn-info mt-2 border rounded-pill mx-3" to="/profile">profile</Link>
+                </div>
             </form>
         </RootLayout>
     )

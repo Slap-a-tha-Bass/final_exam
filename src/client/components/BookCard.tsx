@@ -20,8 +20,8 @@ const BookCard = ({ title, author, price, id, categoryid, isPreview }: Books) =>
                 <h2 className="card-text text-center text-info">{author}</h2>
                 <h4 className="card-text text-center text-info">{price}</h4>
                 <div className="d-flex justify-content-center">
-                    {isPreview && <Link className="btn btn-info btn-sm mx-3" to={`/edit/${id}`}>edit</Link>}
-                    {isPreview && <button className="btn btn-info btn-sm mx-3" onClick={handleDelete}  >delete</button>}
+                    {isPreview && <Link className="btn btn-info btn-sm mx-3 border rounded-pill" to={`/edit/${id}`}>edit</Link>}
+                    {isPreview && <button className="btn btn-info btn-sm mx-3 border rounded-pill" onClick={handleDelete}  >delete</button>}
                 </div>
             </div>
         </div>

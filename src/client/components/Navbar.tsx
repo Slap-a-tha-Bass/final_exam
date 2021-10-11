@@ -1,13 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 const Navbar = () => {
     return (
-        <div>
-            <Link className="btn btn-outline-info mx-3" to="/">home</Link>
-            <Link className="btn btn-outline-info mx-3" to="/books">books</Link>
-            <Link className="btn btn-outline-info mx-3" to="/login">login</Link>
-            <Link className="btn btn-outline-info mx-3" to="/register">register</Link>
+        <div className="d-flex justify-content-center mb-2">
+            <NavLink className="btn btn-outline-info mx-3 border rounded-pill" exact to="/">home</NavLink>
+            <NavLink className="btn btn-outline-info mx-3 border rounded-pill" exact to="/books">books</NavLink>
+            <NavLink className="btn btn-outline-info mx-3 border rounded-pill" exact to="/login">login</NavLink>
+            <NavLink className="btn btn-outline-info mx-3 border rounded-pill" exact to="/register">register</NavLink>
         </div>
     )
 }
