@@ -7,17 +7,24 @@ import { apiService } from '../utils/api-service';
 const Register = () => {
     const history = useHistory();
     const { values, handleChanges } = useForm();
-    const handleLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const handleRegister = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        apiService('/auth/login', 'POST', {email: values.email, password: values.password, role: 'guest'})
+        apiService('/auth/register', 'POST', {name: values.name, email: values.email, password: values.password, role: 'guest'})
             .then(token => {
-                localStorage.setItem('token', token),
+                localStorage.setItem('token', token.token),
                 history.push('/profile')
             })
     }
     return (
         <RootLayout>
             <form className="form-group p-2">
+            <label htmlFor="" className="text-info">name</label>
+                <input 
+                name="name"
+                value={values.name || ''}
+                onChange={handleChanges}
+                type="text" 
+                className="form-control" />
                 <label htmlFor="" className="text-info">email</label>
                 <input 
                 name="email"
@@ -32,7 +39,7 @@ const Register = () => {
                 onChange={handleChanges}
                 type="password" 
                 className="form-control" />
-                <button onClick={handleLogin} className="btn btn-info">login</button>
+                <button onClick={handleRegister} className="btn btn-info">login</button>
             </form>
         </RootLayout>
     )
