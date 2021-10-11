@@ -1,25 +1,38 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect, useHistory } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import { Books } from '../../../types';
 import BookCard from '../components/BookCard';
 import RootLayout from '../components/RootLayout';
 import { apiService } from '../utils/api-service';
 
 const Books = () => {
+    const history = useHistory();
     const [books, setBooks] = useState<Books[]>([]);
     useEffect(() => {
         apiService('/api/books')
             .then(data => setBooks(data));
     }, []);
-
+    // if (books === ['']) {
+    //     Swal.fire({
+    //         title: 'No Books Posted!',
+    //         icon: 'error',
+    //         text: 'You will be redirected to home page',
+    //         confirmButtonText: 'OK'
+    //     }).then(result => {
+    //         if (result.isConfirmed) {
+    //             <Redirect exact to="/" />
+    //         }
+    //     })
+    // }
     return (
         <RootLayout>
             <h1 className="text-info text-center bg-light border border-info rounded-pill col-md-4 p-2 my-3">books</h1>
-            {books.map((book) => (
+            {books.map((book) => {
                 <Link className="text-decoration-none" to={`/books/${book.id}`} key={book.id}>
                     <BookCard {...book} />
                 </Link>
-            ))}
+            })}
         </RootLayout>
     )
 }
