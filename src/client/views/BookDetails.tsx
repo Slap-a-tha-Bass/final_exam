@@ -11,9 +11,11 @@ const BookDetails = () => {
 
     useEffect(() => {
         apiService(`/api/books/${id}`)
-            .then(data => setBook(data));
+            .then(data => {
+                setBook(data)
+            });
     }, [id]);
-
+    
     return (
         <RootLayout>
             <BookCard key={id} {...book} isPreview />
