@@ -1,13 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { Books } from '../../../types';
+import { Books, Categories } from '../../../types';
 import { apiService } from '../utils/api-service';
 
 const BookCard = ({ title, author, price, id, categoryid, isPreview }: Books) => {
     const history = useHistory();
     const TOKEN = localStorage.getItem('token');
-
+    const [catName, setCatName] = useState<Categories['name']>('');
+    useEffect(() => {
+        apiService(`/api/categories/${categoryid}`)
+            .then(data => {
+                setCatName(data.name)
+                console.log(data)
+            });
+    }, []);
     const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
         
         if (Swal.fire({
@@ -30,9 +37,11 @@ const BookCard = ({ title, author, price, id, categoryid, isPreview }: Books) =>
         })) {
         }
     }
+    
     return (
         <div className="card border shadow rounded m-2 bg-light">
             <h1 className="card-title text-center text-info">{title}</h1>
+            <p className="card-text text-center text-info">{catName}</p>
             <div className="card-body">
                 <h2 className="card-text text-center text-info">{author}</h2>
                 <h4 className="card-text text-center text-info">{price}</h4>
