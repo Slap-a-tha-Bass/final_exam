@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Link, Redirect, useHistory } from 'react-router-dom';
-import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
+// import Swal from 'sweetalert2';
 import { Books } from '../../../types';
 import BookCard from '../components/BookCard';
 import RootLayout from '../components/RootLayout';
 import { apiService } from '../utils/api-service';
 
 const Books = () => {
-    const history = useHistory();
     const [books, setBooks] = useState<Books[]>([]);
     useEffect(() => {
         apiService('/api/books')
