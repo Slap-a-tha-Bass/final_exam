@@ -5,6 +5,7 @@ import { Categories } from '../../../types';
 import RootLayout from '../components/RootLayout';
 import { useForm } from '../hooks/useForm';
 import { apiService } from '../utils/api-service';
+import Swal from 'sweetalert2';
 
 const EditDetails = () => {
     const { id } = useParams<{ id: string }>();
@@ -25,10 +26,17 @@ const EditDetails = () => {
 
     const handleEdit = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        apiService(`/api/books/${id}`, 'PUT', { title: values.title, author: values.author, price: values.price, categoryid: values.categoryid })
-            .then(data => {
-                history.push('/books')
-            })
+        if (Swal.fire({
+            title: 'Confirmation',
+            icon: 'question',
+            text: `Are you sure you want to edit ${values.title} by ${values.author}?`,
+            confirmButtonText: 'Yes I am sure!'
+        })) {
+            apiService(`/api/books/${id}`, 'PUT', { title: values.title, author: values.author, price: values.price, categoryid: values.categoryid })
+                .then(data => {
+                    history.push('/books')
+                })
+        }
     }
     return (
         <RootLayout>

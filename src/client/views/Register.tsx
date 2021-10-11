@@ -15,6 +15,10 @@ const Register = () => {
                     history.push('/profile')
             })
     }
+    let disabledBtn = true;
+    if (values.email && values.password && values.name) {
+        disabledBtn = false;
+    }
     return (
         <RootLayout>
             <h1 className="text-info text-center bg-light border border-info rounded-pill col-md-4 p-2 mt-3">register</h1>
@@ -40,7 +44,7 @@ const Register = () => {
                     onChange={handleChanges}
                     type="password"
                     className="form-control" />
-                <button onClick={handleRegister} className="btn btn-info border rounded-pill mt-2">login</button>
+                <button onClick={handleRegister} disabled={disabledBtn} className="btn btn-info border rounded-pill mt-2">login</button>
             </form>
         </RootLayout>
     )

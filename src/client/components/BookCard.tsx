@@ -1,17 +1,23 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import { Books } from '../../../types';
 import { apiService } from '../utils/api-service';
 
 const BookCard = ({ title, author, price, id, categoryid, isPreview }: Books) => {
     const history = useHistory();
     const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
-        if(confirm(`Are you sure you want to delete?`)){
+        if (Swal.fire({
+            title: 'Deletion',
+            icon: 'warning',
+            text: `Are you sure you want to delete ${title} by ${author}?`,
+            confirmButtonText: 'Yes I am sure!'
+        })) {
             apiService(`/api/books/${id}`, 'DELETE', { title, author, price, categoryid })
                 .then(data => {
                     history.push('/books');
                 })
-        }
+        } 
     }
     return (
         <div className="card border shadow rounded m-2 bg-light">
